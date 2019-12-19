@@ -8,22 +8,59 @@ The notebook big-bears.ipynb shows how the model is trained, using fastai.
 
 panda.py is a very tiny Starlette API server which simply accepts a file image URL and runs it against the pre-calculated model.
 
-## Install and run
+## Install 
 
-Ensure all required modules installed
+#### Requirements
+Install Python 3 (includes pip3) and virtualenv
 
-- pip3 install torch torchvision
-- pip3 install fastai
-- pip3 install starlette
-- pip3 install aiohttp
-- pip3 install uvicorn
+```bash
+$ brew install python3
+```
 
-### Run server 
+```bash
+$ pip3 install virtualenv
+```
+
+#### Virtual env
+Create and activate a virtualenv:
+```bash
+$ virtualenv -p python3 <desired-path>
+```
+```bash
+$ source <desired-path>/bin/activate
+```
+
+#### Install dependencies 
+
+Ensure all required dependencies are available
+
+```bash
+$ pip install torch torchvision
+$ pip install fastai
+$ pip install starlette
+$ pip install aiohttp
+$ pip install uvicorn
+```
+
+#### Run server 
 
 Start from command line
 
-```python
-> uvicorn example:app
+```bash
+$ uvicorn panda:app
+```
+
+#### Test 
+
+```bash
+$ curl http://127.0.0.1:8000/classify-url?url=https%3A%2F%2Fmedia.pri.org%2Fs3fs-public%2Fstyles%2Fstory_main%2Fpublic%2Fimages%2F2019%2F11%2F2019-11-19-beibeipanda.jpg
+```
+
+#### Deactivate
+
+Deactivate the virtualenv:
+```bash
+$ deactivate
 ```
 
 ## Example
