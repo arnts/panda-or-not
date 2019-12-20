@@ -8,10 +8,14 @@ The notebook big-bears.ipynb shows how the model is trained, using fastai.
 
 panda.py is a very tiny Starlette API server which simply accepts a file image URL and runs it against the pre-calculated model.
 
-## Install 
+![](https://media.pri.org/s3fs-public/styles/story_main/public/images/2019/11/2019-11-19-beibeipanda.jpg?itok=xex8MzPS)
 
-#### Requirements
-Install Python 3 (includes pip3) and virtualenv
+## Local Setup  
+
+To run this API locally (on a Mac), follow these steps.
+
+#### Install requirements
+Ensure Python 3 (includes pip3) and virtualenv are installed
 
 ```bash
 $ brew install python3
@@ -21,64 +25,71 @@ $ brew install python3
 $ pip3 install virtualenv
 ```
 
-#### Virtual env
-Create and activate a virtualenv:
+#### Pull down the project
+
+Clone the GitHub repository
+
+#### Setup the virtual env (fancy new command prompt)
+Create a virtual environment inside the project’s root directory
+
 ```bash
-$ virtualenv -p python3 <desired-path>
+$ cd panda-or-not
 ```
+
 ```bash
-$ source <desired-path>/bin/activate
+$ python3 -m venv venv/
 ```
 
-#### Install dependencies 
-
-Ensure all required dependencies are available
-
+Install the project’s dependencies inside an active virtual environment
 ```bash
-$ pip install torch torchvision
-$ pip install fastai
-$ pip install starlette
-$ pip install aiohttp
-$ pip install uvicorn
+$ source bin/activate
+(venv)$ pip install -r requirements.txt
 ```
 
 #### Run server 
 
-Start from command line
+Start server from command line
 
 ```bash
-$ uvicorn panda:app
+(venv)$ uvicorn panda:app
 ```
 
-#### Test 
+#### Test endpoint 
+
+Run from command line (another window)
 
 ```bash
-$ curl http://127.0.0.1:8000/classify-url?url=https%3A%2F%2Fmedia.pri.org%2Fs3fs-public%2Fstyles%2Fstory_main%2Fpublic%2Fimages%2F2019%2F11%2F2019-11-19-beibeipanda.jpg
+$ curl http://127.0.0.1:8000/classify-url?url=https%3A%2F%2Fmedia.pri.org%2Fs3fs-public%2Fstyles%2Fstory_main%2Fpublic%2Fimages%2F2019%2F11%2F2019-11-19-beibeipanda.jpg | python -m json.tool
 ```
 
-#### Deactivate
+The output should be something like this:
 
-Deactivate the virtualenv:
-```bash
-$ deactivate
-```
-
-## Example
-
-Input image: https://media.pri.org/s3fs-public/styles/story_main/public/images/2019/11/2019-11-19-beibeipanda.jpg?itok=xex8MzPS
-
-![](https://media.pri.org/s3fs-public/styles/story_main/public/images/2019/11/2019-11-19-beibeipanda.jpg?itok=xex8MzPS)
-
-### Result
-
-JSON response:
 ```json
 {
-  "predictions": [
-    ["panda_bear", 0.9997597336769104],
-    ["brown_bear", 0.00010128997382707894],
-    ["black_bear", 0.00009877605771180242],
-    ["polar_bear", 0.000040194041503127664]
-  ]
+    "predictions": [
+        [
+            "panda_bear",
+            0.9997597336769104
+        ],
+        [
+            "brown_bear",
+            0.00010128997382707894
+        ],
+        [
+            "black_bear",
+            9.877605771180242e-05
+        ],
+        [
+            "polar_bear",
+            4.0194041503127664e-05
+        ]
+    ]
 }
+```
+
+#### Deactivate (old familiar command prompt)
+
+Stop server, and deactivate the virtualenv:
+```bash
+$ deactivate
 ```
