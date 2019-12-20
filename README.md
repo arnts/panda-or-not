@@ -48,7 +48,7 @@ $ source venv/bin/activate
 
 #### Run server 
 
-Start server from command line
+Start the server from command line
 
 ```bash
 (venv)$ uvicorn panda:app
@@ -56,7 +56,7 @@ Start server from command line
 
 #### Test endpoint 
 
-Run from command line (another window)
+Run from command line (in another window)
 
 ```bash
 $ curl http://127.0.0.1:8000/classify-url?url=https%3A%2F%2Fmedia.pri.org%2Fs3fs-public%2Fstyles%2Fstory_main%2Fpublic%2Fimages%2F2019%2F11%2F2019-11-19-beibeipanda.jpg | python -m json.tool
@@ -91,5 +91,5 @@ The output should be something like this:
 
 Stop server, and deactivate the virtualenv:
 ```bash
-$ deactivate
+(venv)$ deactivate
 ```
