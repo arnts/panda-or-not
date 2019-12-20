@@ -12,7 +12,7 @@ panda.py is a tiny Starlette API server which simply accepts an image URL and ru
 
 ## Local Setup  
 
-To test this API locally (on a Mac), follow these steps.
+To test this API locally (on a Mac), you can follow these steps.
 
 #### Install requirements
 Ensure Python 3 (includes pip3) and virtualenv are installed
