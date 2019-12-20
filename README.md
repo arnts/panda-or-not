@@ -42,7 +42,7 @@ $ python3 -m venv venv/
 
 Install the project’s dependencies inside an active virtual environment
 ```bash
-$ source bin/activate
+$ source venv/bin/activate
 (venv)$ pip install -r requirements.txt
 ```
 
