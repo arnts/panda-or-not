@@ -1,31 +1,30 @@
 from starlette.applications import Starlette
-from starlette.responses import JSONResponse, HTMLResponse, RedirectResponse
+from starlette.responses import JSONResponse, HTMLResponse
 from starlette.routing import Route
 from fastai.vision import (
     open_image,
     load_learner,
 )
-from pathlib import Path
 from io import BytesIO
 import sys
 import uvicorn
 import aiohttp
 import asyncio
+import socket
 
 async def get_bytes(url):
-    async with aiohttp.ClientSession() as session:
+    # fix to network unreachable from local mac https://github.com/aio-libs/aiohttp/issues/2522    
+    conn = aiohttp.TCPConnector(
+        family=socket.AF_INET,
+        verify_ssl=False,
+    )
+    async with aiohttp.ClientSession(connector=conn) as session:
         async with session.get(url) as response:
             return await response.read()
 
 app = Starlette()
 
 bear_learner = load_learner('.', "bears.pkl")
-
-@app.route("/upload", methods=["POST"])
-async def upload(request):
-    data = await request.form()
-    bytes = await (data["file"].read())
-    return predict_image_from_bytes(bytes)
 
 @app.route("/classify-url", methods=["GET"])
 async def classify_url(request):
@@ -53,10 +52,6 @@ def form(request):
             <input type="submit" value="Fetch and analyze image">
         </form>
     """)
-
-@app.route("/form")
-def redirect_to_homepage(request):
-    return RedirectResponse("/")
 
 if __name__ == "__main__":
     if "serve" in sys.argv:
