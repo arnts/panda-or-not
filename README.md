@@ -1,18 +1,18 @@
 # panda-or-not
 
-A first attempt at a machine learning API, using a pre-calculated model trained using images from Google Images searches. 
+A first attempt at a machine learning API, using a pre-calculated model trained using images from Google Image searches. 
 
 The model is bears.pkl - an 87MB file.
 
 The notebook big-bears.ipynb shows how the model is trained, using fastai.
 
-panda.py is a very tiny Starlette API server which simply accepts a file image URL and runs it against the pre-calculated model.
+panda.py is a tiny Starlette API server which simply accepts an image URL and runs it against the pre-calculated model.
 
 ![](https://media.pri.org/s3fs-public/styles/story_main/public/images/2019/11/2019-11-19-beibeipanda.jpg?itok=xex8MzPS)
 
 ## Local Setup  
 
-To run this API locally (on a Mac), follow these steps.
+To test this API locally (on a Mac), follow these steps.
 
 #### Install requirements
 Ensure Python 3 (includes pip3) and virtualenv are installed
